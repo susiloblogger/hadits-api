@@ -3,11 +3,9 @@ import Cors from 'cors'
 import Routes from './api/Routes'
 
 class Server {
-  private application: Application
-  private port: number | string
+  public application: Application
 
   constructor() {
-    this.port = process.env.PORT || 3300
     this.application = Express()
     this.plugins()
     this.routes()
@@ -22,12 +20,6 @@ class Server {
   private routes(): void {
     this.application.use(Routes)
   }
-
-  public run(): void {
-    this.application.listen(this.port, () => {
-      console.log(`Server listening on http://localhost:${this.port}`)
-    })
-  }
 }
 
-export default new Server().run()
+export default new Server().application
